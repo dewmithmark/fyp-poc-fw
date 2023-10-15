@@ -1,5 +1,4 @@
 *Debug
 *.vs
-*transmitter.atsln
-*transmitter.componentinfo.xml
-*transmitter.cproj
+fyp-poc-fw/transmitter.componentinfo.xml
+fyp-poc-fw/transmitter.cproj
