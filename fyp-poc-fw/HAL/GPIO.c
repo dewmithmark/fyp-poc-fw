@@ -8,6 +8,9 @@
 #include <avr/interrupt.h>
 #include "GPIO.h"
 
+void (*isr0_link_func)(void);
+void (*isr1_link_func)(void);
+
 void GPIO_SET_PIN(uint8_t pin, uint8_t port, uint8_t status)
 {
 	switch(port)
@@ -185,7 +188,7 @@ void GPIO_PCINT_SET(uint8_t pin, uint8_t port)
 	sei();
 }
 
-void GPIO_EXTINT_SET(uint8_t int_type, uint8_t trigger_edge)
+void GPIO_EXTINT_SET(uint8_t int_type, uint8_t trigger_edge, void (*isr_linker)(void) )
 {
 	switch(trigger_edge)
 	{
@@ -270,6 +273,18 @@ void GPIO_EXTINT_SET(uint8_t int_type, uint8_t trigger_edge)
 			break;
 	}
 	
+	if(INT0 == int_type)
+	{
+		isr0_link_func = isr_linker;
+	}
+	else if(INT1 == int_type)
+	{
+		isr1_link_func = isr_linker;
+	}
+	else
+	{
+		//no implementation
+	}	
 	sei();
 }
 
@@ -287,4 +302,14 @@ void GPIO_EXTINT_RESET(uint8_t int_type)
 	{
 		
 	}
+}
+
+ISR(INT0_vect)
+{
+	isr0_link_func();
+}
+
+ISR(INT1_vect)
+{
+	isr1_link_func();
 }

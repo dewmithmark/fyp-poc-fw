@@ -103,8 +103,15 @@ void GPIO_PCINT_SET(uint8_t pin, uint8_t port);
  *
  * @retval
  */
-void GPIO_EXTINT_SET(uint8_t int_type, uint8_t trigger_edge);
+void GPIO_EXTINT_SET(uint8_t int_type, uint8_t trigger_edge, void (*isr_linker)(void));
 
+/**
+ * @brief 
+ *
+ * @param
+ *
+ * @retval
+ */
 void GPIO_EXTINT_RESET(uint8_t int_type);
       
 
