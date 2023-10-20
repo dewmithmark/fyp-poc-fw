@@ -1,4 +1,9 @@
 *Debug
 *.vs
+<<<<<<< HEAD
 *transmitter.componentinfo.xml
 *transmitter.cproj
+=======
+*fyp-poc-fw/transmitter.componentinfo.xml
+*fyp-poc-fw/transmitter.cproj
+>>>>>>> 2f2e0d949c1b0038c591620c5d26a3d744f9dde8
