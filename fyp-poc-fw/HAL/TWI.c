@@ -120,7 +120,7 @@ void TWI_READ(uint8_t numofbytes , uint8_t * data)
 	}
 }
 
-void TWI_init()
+void TWI_INIT()
 {   
   
   TWBR = (((F_CPU/BIT_RATE) - 16)/2) & (0xff);
