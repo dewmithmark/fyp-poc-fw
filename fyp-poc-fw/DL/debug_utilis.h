@@ -12,6 +12,8 @@
 #include <stdio.h>
 #include <avr/io.h>
 
+char BUFFER[100];
+
 #ifdef _GNUC_
 #define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
 #else

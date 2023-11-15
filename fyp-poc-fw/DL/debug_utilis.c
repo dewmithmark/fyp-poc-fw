@@ -9,7 +9,7 @@
 #include "debug_utilis.h"
 #include "util/delay.h"
 #include "UART.h"
-char BUFFER[50];
+
 
 /**
  * @brief 
