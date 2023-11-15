@@ -11,7 +11,7 @@
 #include <util/delay.h>
 #include "UART.h"
 
-#define F_CPU 16000000UL
+//#define F_CPU 16000000UL
 #define	UBRR_VALUE ((F_CPU / (BAUD_RATE * 16UL)) - 1)
 
 /**
