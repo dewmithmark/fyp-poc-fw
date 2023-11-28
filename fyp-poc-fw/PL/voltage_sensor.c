@@ -12,9 +12,14 @@
 
 #include <util/delay.h>
 #include <stdint.h>
+#include "voltage_sensor.h"
 #include "debug_utilis.h"
 #include "GPIO.h"
 #include "ADC.h"
+
+uint16_t max_raw_val = 0;
+uint16_t min_raw_val = 1023;
+	
 void voltage_sensor_init()
 {
 	GPIO_SET_PIN(VOLTAGE_SENSOR_OUT_Pin, VOLTAGE_SENSOR_OUT_Port, INPUT);
@@ -22,9 +27,9 @@ void voltage_sensor_init()
 
 uint16_t get_voltage_pp()
 {
-	static uint16_t max_raw_val = 0;
-	static uint16_t min_raw_val = 1023;
 	static uint16_t raw_voltage_val = 0;
+	max_raw_val = 0;
+	min_raw_val = 1023;
 	
 	for(uint8_t i=0; i<NUM_OF_SAMPLES; i++)
 	{		
@@ -47,10 +52,14 @@ uint16_t get_voltage_pp()
     //debug_print_float(max_raw_val - min_raw_val);
 	return (max_raw_val - min_raw_val);
 }
-
+double actual_voltage_pp_ = 0;
+double actual_voltage_pp = 0;
 double get_voltage_rms()
-{
-    float actual_voltage_pp = (get_voltage_pp() * 5.0)/1023.0;
-	
-	return (actual_voltage_pp / 1.41421 );
+{    
+	 for(uint8_t i = 0; i < 10; i++)
+	 {
+		 actual_voltage_pp += ((double)get_voltage_pp() * 5000.0)/1023.0;
+	 }	 
+	 actual_voltage_pp /= 10000.0;
+	return actual_voltage_pp * 0.35355 * 0.8986 * 230;
 }

@@ -8,9 +8,12 @@
 #include <avr/io.h>
 #include <util/delay.h>
 #include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 #include "TWI.h"
 #include "LCD.h"
+#include "debug_utilis.h"
 
 #define RS				0x01
 #define RW				0x02
@@ -19,6 +22,8 @@
 #define LCD_SA			0x27
 
 #define BACKLIGHT_BM	0x08
+
+char LCD_BUFFER[32];
 
 uint8_t local_buffer;
 char tmp; 
@@ -71,18 +76,18 @@ void LCD_init()
 }
 
 //function to turn String into ASCII values
-void LCD_print(char string[32])
+void LCD_print(char *string)
 {
-    short i;
-    for(i=0; string[i]!='\0'; i++)
+    
+    for(int i=0; string[i]!='\0'; i++)
 	{    
         tmp = string[i];
         LCD_write((int)tmp , 2);
-    }
-
-   
+		_delay_ms(10); 
+    }  
 
 }
+
 void LCD_set_cursor(short row, short coloumn)
 {  
     static int cursor_pos = 0;	
@@ -116,4 +121,11 @@ void LCD_clear()
 }
 
 
+void LCD_print_float(double val)
+{
+	int int_part = (int)val;
+	int dec_part = (int)((val - int_part) * 1000); // Extract 3 decimal places
+	sprintf(LCD_BUFFER, "%d.%03d", int_part, dec_part);
+	LCD_print(LCD_BUFFER);
+}
 

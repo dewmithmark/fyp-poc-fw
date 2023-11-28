@@ -6,6 +6,7 @@
  */
 
 #include <util/delay.h>
+#include <math.h>
 #include "GPIO.h" 
 #include "Timer.h"
 #include "debug_utilis.h"
@@ -25,7 +26,7 @@ void phase_angle_init()
 	TIMER_US_INIT();	
 }
 
-uint16_t get_phase_angle()
+double get_phase_angle()
 {	
 	enable_timer_INT(T1);
 	for(sample_counter = 0; sample_counter < NUM_OF_SAMPLES; sample_counter++)
@@ -34,10 +35,10 @@ uint16_t get_phase_angle()
 	}
     disable_timer_INT(T1);	
 	duration /= NUM_OF_SAMPLES;
-	sprintf(BUFFER, "duration = %ld  ", duration);
-	debug_print(BUFFER);
-	
-	return ((duration * 360)/20000);
+	//sprintf(BUFFER, "duration = %ld  ", duration);
+	//debug_print(BUFFER);
+		
+	return ((duration * 2 * M_PI)/20000);
 	
 }
 

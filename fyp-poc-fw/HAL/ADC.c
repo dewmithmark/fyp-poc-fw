@@ -1,4 +1,4 @@
-/**
+  /**
  * @file ADC.c
  * @author Dewmith Ranasinghe (dewmithrana@gmail.com)
  * @brief HAL level APIs to configure and read ADC channels

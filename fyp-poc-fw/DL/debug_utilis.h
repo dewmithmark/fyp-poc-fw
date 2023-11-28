@@ -12,13 +12,6 @@
 #include <stdio.h>
 #include <avr/io.h>
 
-char BUFFER[100];
-
-#ifdef _GNUC_
-#define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
-#else
-#define PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)
-#endif
 
 /**
  * @brief function prototypes for linking UART protocol with printf syntax
@@ -27,7 +20,7 @@ char BUFFER[100];
 
 void debug_print_float(float value);
 
-void debug_print( const char *message);
+void debug_print(char *message);
 
 
 #endif /* DEBUG_UTILIS_H_ */

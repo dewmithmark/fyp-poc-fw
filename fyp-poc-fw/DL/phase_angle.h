@@ -12,7 +12,7 @@
 void phase_angle_init();
 
 
-uint16_t get_phase_angle();
+double get_phase_angle();
 
 void  phase_diff_measure(void) ;
 
